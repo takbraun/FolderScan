@@ -1,0 +1,15 @@
+services:
+  nsfw-scanner:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - '/home/takbraun/Pictures:/media/pictures'
+      - '/home/takbraun/Videos:/media/videos'
+      - './output:/output'
+      - './cache:/home/appuser/.cache'
+    environment:
+      - PYTHONUNBUFFERED=1
+      - TORCH_HOME=/home/appuser/.cache/torch
+    restart: unless-stopped
+    mem_limit: 6g
